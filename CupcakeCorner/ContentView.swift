@@ -21,8 +21,10 @@ struct ContentView: View {
     @State private var results = [Result]()
     
     var body: some View {
+        AsyncImage(url: URL(string: "https://hws.dev/img/logo.png"), scale: 3 )
         List(results, id:\.trackId) {item in
             VStack(alignment: .leading) {
+                
                 Text(item.trackName)
                     .font(.headline)
                 Text(item.collectionName )
@@ -33,7 +35,7 @@ struct ContentView: View {
     }
     
     func loadData() async {
-        guard let url = URL(string: "https://itunes.apple.com/search?term=taylor+swift&entity=song") else {
+        guard let url = URL(string: "https://itunes.apple.com/search?term=nickelback&entity=song") else {
             print("Ivalid URL")
             return
         }
