@@ -27,7 +27,13 @@ struct ContentView: View {
                     .font(.headline)
                 Text(item.collectionName )
             }
+        }.task {
+            await loadData()
         }
+    }
+    
+    func loadData() async {
+        
     }
 }
 
