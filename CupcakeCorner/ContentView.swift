@@ -17,9 +17,7 @@ struct Result: Codable {
     var collectionName: String
 }
 
-struct ContentView: View {
-    @State private var results = [Result]()
-    
+struct ImageView: View {
     var body: some View {
         AsyncImage(url: URL(string: "https://hws.dev/img/logo.png")) {phase in
             if let image = phase.image {
@@ -32,15 +30,39 @@ struct ContentView: View {
                 ProgressView()
             }
         }
-        List(results, id:\.trackId) {item in
-            VStack(alignment: .leading) {
-                
-                Text(item.trackName)
-                    .font(.headline)
-                Text(item.collectionName )
+    }
+}
+
+struct ContentView: View {
+    @State private var results = [Result]()
+    @State private var userName: String = ""
+    @State private var email: String = ""
+    var disabledForm: Bool {
+        userName.isEmpty || email.isEmpty
+    }
+    
+    var body: some View {
+        
+//        List(results, id:\.trackId) {item in
+//            VStack(alignment: .leading) {
+//                ImageView()
+//                Text(item.trackName)
+//                    .font(.headline)
+//                Text(item.collectionName )
+//            }
+//        }.task {
+//            await loadData()
+//        }
+        Form {
+            Section {
+                TextField("Username", text: $userName)
+                TextField("Email", text: $email)
             }
-        }.task {
-            await loadData()
+            Section {
+                Button("Create account") {
+                    //
+                }
+            }.disabled(disabledForm)
         }
     }
     
