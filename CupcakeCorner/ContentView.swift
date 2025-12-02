@@ -15,8 +15,8 @@ struct ContentView: View {
     var body: some View {
         Button("Play haptic") {
          //    counter += 1
-            complexSuccess( )
-        }
+            complexSuccess()
+        }.onAppear(perform: prepereHaptics)
        // .sensoryFeedback(.increase, trigger: counter)
     }
     func prepereHaptics() {
