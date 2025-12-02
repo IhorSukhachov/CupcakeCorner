@@ -11,8 +11,15 @@ import Foundation
 class Order {
     static let types = ["Vanilla", "Strawberry", "Red Velvet", "Chocolate", "Carrot Cake "]
     var type = 0
-    var quantity = 1
-    var specialRequestsEnabled: Bool = false
+    var quantity = 3
+    var specialRequestsEnabled: Bool = false {
+        didSet {
+            if specialRequestsEnabled == false {
+                extraFrosting = false
+                addSprinkles = false
+            }
+        }
+    }
     var extraFrosting: Bool = false
     var addSprinkles: Bool = false
 }
