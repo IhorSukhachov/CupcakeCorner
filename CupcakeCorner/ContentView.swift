@@ -9,12 +9,13 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State private var counter: Int = 0
+  //  @State private var counter: Int = 0
     @State private var engine: CHHapticEngine?
     
     var body: some View {
-        Button("tap count \(counter)") {
-             counter += 1
+        Button("Play haptic") {
+         //    counter += 1
+            complexSuccess( )
         }
        // .sensoryFeedback(.increase, trigger: counter)
     }
