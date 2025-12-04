@@ -23,8 +23,15 @@ struct CheckoutView: View {
                 .frame(height:233)
                 
                 Text("Your total cost is: \(order.cost, format: .currency(code: "USD"))")
+                    .font(.title)
+                
+                Button("Place order"){
+                    //
+                }.padding()
             }
-        }
+        }.navigationTitle("Checkout")
+            .navigationBarTitleDisplayMode(.inline)
+            .scrollBounceBehavior(.basedOnSize)
     }
 }
 
