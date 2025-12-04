@@ -22,5 +22,11 @@ class Order {
     }
     var extraFrosting: Bool = false
     var addSprinkles: Bool = false
+    
+    var name = ""
+    var streetAdress = ""
+    var city = ""
+    var zipCode = ""
+    
 }
  
