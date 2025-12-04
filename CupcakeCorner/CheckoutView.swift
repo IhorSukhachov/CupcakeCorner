@@ -25,13 +25,19 @@ struct CheckoutView: View {
                 Text("Your total cost is: \(order.cost, format: .currency(code: "USD"))")
                     .font(.title)
                 
-                Button("Place order"){
-                    //
-                }.padding()
+                Button("Place order") {
+                    Task{
+                        await placeOrder()
+                    }
+                }
+                    .padding()
             }
         }.navigationTitle("Checkout")
             .navigationBarTitleDisplayMode(.inline)
             .scrollBounceBehavior(.basedOnSize)
+    }
+    func placeOrder() async {
+        
     }
 }
 
