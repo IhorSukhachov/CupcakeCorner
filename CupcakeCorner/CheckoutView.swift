@@ -15,5 +15,5 @@ struct CheckoutView: View {
 }
 
 #Preview {
-    CheckoutView(order: <#T##Order#>)
+    CheckoutView(order: Order())
 }
