@@ -31,5 +31,21 @@ class Order {
     var hasValidAddress: Bool {
         return !name.isEmpty && !streetAdress.isEmpty && !city.isEmpty && !zipCode.isEmpty
     }
+    
+    var cost: Decimal {
+        //one cake = 2$
+        var cost = Decimal(quantity) * 2
+        //complication cost
+        cost += Decimal(type) / 2
+        //extra frosting 1$
+        if extraFrosting {
+            cost += Decimal(quantity)
+        }
+        // sprinkles option 0.5$
+        if addSprinkles {
+            cost += Decimal(quantity) / 2
+        }
+        return cost
+    }
 }
  
