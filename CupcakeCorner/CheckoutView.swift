@@ -37,7 +37,7 @@ struct CheckoutView: View {
             .scrollBounceBehavior(.basedOnSize)
     }
     func placeOrder() async {
-        
+        guard let encoded = try? JSONEncoder().encode(order) else {return}
     }
 }
 

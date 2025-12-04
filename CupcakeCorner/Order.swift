@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class Order {
+class Order: Codable {
     static let types = ["Vanilla", "Strawberry", "Red Velvet", "Chocolate", "Carrot Cake "]
     var type = 0
     var quantity = 3
