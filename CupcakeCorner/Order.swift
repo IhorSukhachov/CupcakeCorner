@@ -28,5 +28,8 @@ class Order {
     var city = ""
     var zipCode = ""
     
+    var hasValidAddress: Bool {
+        return !name.isEmpty && !streetAdress.isEmpty && !city.isEmpty && !zipCode.isEmpty
+    }
 }
  
