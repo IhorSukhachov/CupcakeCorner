@@ -8,15 +8,15 @@
 import SwiftUI
  
 struct AddressView: View {
-    var order: Order
+    @Bindable var order: Order
     
     var body: some View {
         Form {
             Section {
                 TextField("Name", text: $order.name)
-                TextField("Street", text: $order.street)
+                TextField("Street", text: $order.streetAdress)
                 TextField("City", text: $order.city)
-                TextField("Postal code", text: $order.postalCode)
+                TextField("Postal code", text: $order.zipCode)
             }
             
             Section {
