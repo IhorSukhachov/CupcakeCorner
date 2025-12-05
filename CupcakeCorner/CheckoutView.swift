@@ -13,6 +13,9 @@ struct CheckoutView: View {
     @State private var confirmationMessage = ""
     @State private var showingConfirmation: Bool = false
     
+    @State private var errorMessage = ""
+    @State private var showingErrorMessage = false
+    
     var body: some View {
         ScrollView{
             VStack{
@@ -44,22 +47,36 @@ struct CheckoutView: View {
             } message: {
                 Text(confirmationMessage)
             }
+            .alert("Something went wrong", isPresented: $showingErrorMessage) {
+                
+            } message: {
+                Text(errorMessage)
+            }
     }
     func placeOrder() async {
-        guard let encoded = try? JSONEncoder().encode(order) else {return}
+        guard let encoded = try? JSONEncoder().encode(order) else {
+            print("Failed to encode order")
+            return}
         
         let url = URL(string: "https://reqres.in/api/cupcakes")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("https://reqres.in/api/cupcakes", forHTTPHeaderField: "x-api-key: reqres_ca53ea4157bd4f1f883d0ae103fa0ff8")
         request.httpMethod = "POST"
         
         do {
             let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
-            
+
             let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
             confirmationMessage = "Your order for \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) cupcakes is on the way!"
             showingConfirmation = true
-        } catch {
+        }
+        catch {
+            
+            if error is URLError {
+                errorMessage = "No internet connection"
+                showingErrorMessage = true
+            }
             print("There was an error: \(error.localizedDescription)")
         }
     }
