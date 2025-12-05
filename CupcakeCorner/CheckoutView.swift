@@ -61,7 +61,7 @@ struct CheckoutView: View {
         let url = URL(string: "https://reqres.in/api/cupcakes")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("https://reqres.in/api/cupcakes", forHTTPHeaderField: "x-api-key: reqres_ca53ea4157bd4f1f883d0ae103fa0ff8")
+        request.setValue("https://reqres.in/api/cupcakes", forHTTPHeaderField: "")
         request.httpMethod = "POST"
         
         do {
