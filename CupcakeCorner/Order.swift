@@ -35,10 +35,55 @@ class Order: Codable {
     var extraFrosting: Bool = false
     var addSprinkles: Bool = false
     
-    var name = ""
-    var streetAdress = ""
-    var city = ""
-    var zipCode = ""
+    private let addressKey = "SavedAddress"
+
+        var name = "" {
+            didSet { saveAddress() }
+        }
+
+        var streetAdress = "" {
+            didSet { saveAddress() }
+        }
+
+        var city = "" {
+            didSet { saveAddress() }
+        }
+
+        var zipCode = "" {
+            didSet { saveAddress() }
+        }
+
+        init() {
+            if let data = UserDefaults.standard.data(forKey: addressKey),
+               let decoded = try? JSONDecoder().decode(Address.self, from: data) {
+                self.name = decoded.name
+                self.streetAdress = decoded.streetAdress
+                self.city = decoded.city
+                self.zipCode = decoded.zipCode
+            }
+        }
+
+        private struct Address: Codable {
+            let name: String
+            let streetAdress: String
+            let city: String
+            let zipCode: String
+        }
+
+        private func saveAddress() {
+            let address = Address(
+                name: name,
+                streetAdress: streetAdress,
+                city: city,
+                zipCode: zipCode
+            )
+
+            if let encoded = try? JSONEncoder().encode(address) {
+                UserDefaults.standard.set(encoded, forKey: addressKey)
+            }
+        }
+    
+    
     
     var hasValidAddress: Bool {
         return !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !streetAdress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !city.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !zipCode.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
